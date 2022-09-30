@@ -1,0 +1,105 @@
+		
+
+
+
+	Foundations Project
+
+--We are in phase one
+	That means that we will have support and guidance during this time.
+
+--What are the requirements?
+	-A user must be able to login create the user for now and create the manage in phase two
+		Database info:id, username, password 
+
+	-A user must be able to register themselves if they do not have credentials
+		Post request to the database for new users
+		Ability to create a new account
+		The default role for accounts should be employees
+
+	-Employees should be able to submit reimbursment tickets
+		Employees can submit a new reimbursement request with amount and description
+		Default ticket status should be Pending (once checked by manage should change to confirmed)
+		DATABASE: ticket_id, amount, description, employee_id references user, status bool pending/confirmed
+	
+	-All of this should be in a java console application
+		
+
+
+Create a menu of options for the user to choose
+1)Employee
+2)Manager
+3)Exit 
+--Which ever they choose, it should have some kind of display with 
+"Welcome to the employee reimbursment portal"
+"Welcome to the manager reimbursement approval portal"
+
+--Once they have chosen employee (for the first phase) they should be able to 
+--Add their username and password to verify their credentials with a SQL query and if statement
+
+--If credentials are correct the employee should have a menu where they choose what they want to do
+	-either submit a reimbursment or exit
+
+--Once they choose reimbursment they should enter a dollar amount, if not dollar amount is entered
+	--It should prompt them again to enter a dollar amount
+
+--Once a dollar amount is entered, a description for the reimbursment should be entered. If not there 
+--needs to be a prompt that tells them to enter something and that it cannot be left blank
+
+--Once a description is added give the employee their ticket number (aka ticket_id)
+
+--And give them a prompt that asks if they want to log out or submit another reimbursment statement
+
+--When trying to create a new user it must check and see if the username is already in use
+
+
+
+
+
+
+Database:
+
+
+--User should have access to login, view past tickets (join of the user and the matching reimbursement requests)
+	and the ability to add a reimbursment request
+
+create table employee (
+em_id serial primary key unique,
+em_username varchar(20),
+em_password varchar(25)
+);
+
+
+create table reimbursement (
+ticket_id serial primary key unique,
+amount decimal(10,2),
+description varchar(100),
+status bool,
+em_id int references employee
+);
+--status true will equal pending
+--Will need to write an update query to automatically put em_id for reimbursments 
+--according to the employee that submitted the request
+insert into reimbursement  (amount, description, status, em_id)
+values 
+(250, 'A new laptop', true, 2),
+(75, 'Client lunch', false, 1),
+(400, 'Stand up desk', true, 3),
+(100, 'AWS Certification', true, 3),
+(100, 'OCA Certification', true, 1);
+
+
+
+
+insert into employee (em_username, em_password)
+values 
+('tdog','12345'),
+('jakethesnake', '98765'),
+('randyc', '34567'),
+('1uigi1','flowerpower'),
+('mario2', 'mushroom2');
+
+
+--All pending request query
+select * from reimbursement r 
+natural join employee e where status = true;
+
