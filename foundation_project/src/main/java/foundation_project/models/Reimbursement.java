@@ -31,6 +31,9 @@ public class Reimbursement {
     public Reimbursement() {
     }
 
+//    public Reimbursement(String changeStatus, boolean status) {
+//    }
+
     public int getTicket_id() {
         return ticket_id;
     }
@@ -69,6 +72,17 @@ public class Reimbursement {
 
     public void setEm_id(int em_id) {
         this.em_id = em_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Reimbursement{" +
+                "ticket_id=" + ticket_id +
+                ", amount=" + amount +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", em_id=" + em_id +
+                '}';
     }
 
     @Override

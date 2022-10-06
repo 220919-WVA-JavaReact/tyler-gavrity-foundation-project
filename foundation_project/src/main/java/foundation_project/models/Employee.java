@@ -10,6 +10,10 @@ public class Employee {
 
         private String password;
 
+    public Employee(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public Employee(int em_id, String username, String password) {
         this.em_id = em_id;
@@ -47,6 +51,8 @@ public class Employee {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
