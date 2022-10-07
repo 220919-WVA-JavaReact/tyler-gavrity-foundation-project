@@ -47,7 +47,7 @@ public class EmployeeService {
         //now use the create method
 
         Employee em = emDao.registerEmployee(user, password);
-        System.out.println("You have been registered. Please try logging in");
+        System.out.println("You have been registered");
 
 
         return em;

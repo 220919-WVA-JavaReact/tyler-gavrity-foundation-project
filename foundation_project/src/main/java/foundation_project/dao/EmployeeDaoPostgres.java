@@ -76,7 +76,7 @@ public class EmployeeDaoPostgres implements EmployeeDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Couldn't register user");
+            System.out.println("Couldn't register user, username may already be in use ");
 
         }
         return em;
