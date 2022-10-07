@@ -11,27 +11,20 @@ import java.sql.SQLException;
 public class EmployeeDaoPostgres implements EmployeeDAO {
     @Override
     public Employee getByUsername(String username) {
-        //To get by username we are going to use a prepared statement to help us prevent against sql injection
-
-        //Let's first create a teacher object to store the information I pull back
+        //first create an object of employee
         Employee logEm = new Employee();
 
-        //I am going to use a try-with-resources block to make sure I close my connection once done
-
         try (Connection conn = ConnectionUtil.getConnection()) {
-            //Let's write the SQL statement that we want to use to get out Teacher back
+            //Write a sql statement, we are going to need a prepared statement to protect against sql injection
 
             String sql = "Select * from employee where em_username = ?";
-            //Put a question mark anywhere you want to enter information
 
-            //Now lets prepare the statement
             PreparedStatement stmt = conn.prepareStatement(sql);
             //Set the individual values for the question marks
             stmt.setString(1, username);
-            //Things are going to be slightly different when trying to take in a whole set of values
             ResultSet rs;
 
-            //Since I'm only expecting one result I'll handle it differently
+            //This is how to only expect one result
             if ((rs = stmt.executeQuery()) != null) {
                 //if the result set is not blank then we found our value
 
@@ -84,7 +77,7 @@ public class EmployeeDaoPostgres implements EmployeeDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Couldn't register user");
-            
+
         }
         return em;
     }
