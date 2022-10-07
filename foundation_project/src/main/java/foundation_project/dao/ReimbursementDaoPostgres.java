@@ -25,6 +25,7 @@ public class ReimbursementDaoPostgres implements ReimbursementDAO{
 
             stmt.setInt(1, amount);
             stmt.setString(2,description);
+//            stmt.setString(3, status);
             stmt.setInt(3, em_id);
 
             ResultSet rs;
@@ -36,7 +37,7 @@ public class ReimbursementDaoPostgres implements ReimbursementDAO{
                 int receivedTicket_id = rs.getInt("ticket_id");
                 int receivedAmount = rs.getInt("amount");
                 String receivedDescription = rs.getString("description");
-                boolean receivedStatus = rs.getBoolean("status");
+//                String receivedStatus = rs.getString("status");
                 int receivedEmId = rs.getInt("em_id");
 
                 System.out.println("Your ticket has been submitted");
@@ -80,7 +81,7 @@ public class ReimbursementDaoPostgres implements ReimbursementDAO{
                 int ticketId = rs.getInt("ticket_id");
                 int amount = rs.getInt("amount");
                 String description = rs.getString("description");
-                boolean status = rs.getBoolean("status");
+                String status = rs.getString("status");
                 int emId = rs.getInt("em_id");
 
 
@@ -106,4 +107,9 @@ public class ReimbursementDaoPostgres implements ReimbursementDAO{
         //This will be used by the manager to change the ticket status from pending to approved
         return false;
     }
+
+//    @Override
+//    public void submitReimbursement(int amount, String description, int em_id) {
+//
+//    }
 }

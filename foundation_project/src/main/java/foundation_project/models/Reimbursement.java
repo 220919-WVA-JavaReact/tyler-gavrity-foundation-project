@@ -10,12 +10,12 @@ public class Reimbursement {
 
     private String description;
 
-    private boolean status;
+    private String status;
 
     private int em_id;
 
 
-    public Reimbursement(int ticket_id, int amount, String description, boolean status, int em_id) {
+    public Reimbursement(int ticket_id, int amount, String description, String status, int em_id) {
         this.ticket_id = ticket_id;
         this.amount = amount;
         this.description = description;
@@ -58,11 +58,11 @@ public class Reimbursement {
         this.description = description;
     }
 
-    public boolean isStatus() {
+    public String isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -76,13 +76,18 @@ public class Reimbursement {
 
     @Override
     public String toString() {
-        return "Reimbursement{" +
-                "ticket_id=" + ticket_id +
-                ", amount=" + amount +
-                ", description='" + description + '\'' +
-                ", status=" + status +
-                ", em_id=" + em_id +
-                '}';
+
+
+        return
+
+
+                "Reimbursement:" +
+                "Your ticket Id: " + ticket_id +
+                ", Amount: " + amount +
+                ", Description: '" + description + '\'' +
+                ", Status: " + status +
+                ", Employee Id: " + em_id
+                ;
     }
 
     @Override

@@ -84,6 +84,7 @@ public class EmployeeDaoPostgres implements EmployeeDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Couldn't register user");
+            
         }
         return em;
     }
