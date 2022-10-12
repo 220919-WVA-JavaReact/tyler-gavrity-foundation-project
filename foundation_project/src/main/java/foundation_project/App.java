@@ -18,12 +18,16 @@ public class App {
 
         System.out.println("Welcome to the Reimbursement Center");
         System.out.println("What would you like to do?");
-        System.out.println("Press 1 to login or 2 to register");
+        System.out.println("Press 1 to login, 2 to register, 3 to close ");
         Scanner input = new Scanner(System.in);
         String logreg = input.nextLine();
         //create options for the user and once logged in be able to create a ticket
         Employee loggedInEmployee = null;
-        switch(logreg){
+//        boolean repeat = true;
+//        while(repeat){
+
+
+        switch (logreg) {
 
             case "1":
 
@@ -37,23 +41,41 @@ public class App {
                 System.out.println("Register");
                 loggedInEmployee = emSer.register();
                 break;
-        }
 
-        if(loggedInEmployee != null){
+
+            case "3":
+
+                //repeat = false;
+                System.out.println("Have a nice day!");
+                break;
+//
+//        }
+        }
+        boolean repeat = true;
+        while(repeat){
+
+        if (loggedInEmployee != null) {
             //Another prompt since the employee has either logged in or registered
             System.out.println("What would you like to do?");
-            System.out.println("Press 1 to create a ticket or 2 to view your tickets");
+            System.out.println("Press 1 to create a ticket, 2 to view your tickets, or 3 to logout");
             String choiceTwo = input.nextLine();
 
-            switch (choiceTwo){
+            switch (choiceTwo) {
                 case "1":
                     rembSer.submitReimbursment(loggedInEmployee);
                     break;
                 case "2":
                     rembSer.getReimbursementbyEmId(loggedInEmployee);
+                    break;
+                case "3":
+
+                    repeat = false;
+                    break;
+
             }
 
         }
+    }
     }
 
 }
