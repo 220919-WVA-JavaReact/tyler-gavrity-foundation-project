@@ -33,6 +33,7 @@ public class App {
 
                 System.out.println("Login");
                 loggedInEmployee = emSer.login();
+                //emSer.looper();
                 break;
 
 
@@ -40,6 +41,7 @@ public class App {
 
                 System.out.println("Register");
                 loggedInEmployee = emSer.register();
+                //emSer.looper();
                 break;
 
 
@@ -52,30 +54,56 @@ public class App {
 //        }
         }
         boolean repeat = true;
-        while(repeat){
+        while (repeat) {
 
-        if (loggedInEmployee != null) {
-            //Another prompt since the employee has either logged in or registered
-            System.out.println("What would you like to do?");
-            System.out.println("Press 1 to create a ticket, 2 to view your tickets, or 3 to logout");
-            String choiceTwo = input.nextLine();
+            if (loggedInEmployee != null) {
+                if (loggedInEmployee.getisManager().equals("manager")) {
+                    System.out.println("+-----------------------------------+");
+                    System.out.println("Welcome to the manager station");
+                    System.out.println("+-----------------------------------+");
+                    System.out.println("Please choose an option");
+                    System.out.println("1 to view pending tickets, 2 to approve or deny a ticket");
+                    String managChoice = input.nextLine();
 
-            switch (choiceTwo) {
-                case "1":
-                    rembSer.submitReimbursment(loggedInEmployee);
+                    switch (managChoice){
+                        case "1":
+                            System.out.println("view pending");
+                            break;
+                        case "2":
+                            System.out.println("Approve or deny");
+                            break;
+                    }
                     break;
-                case "2":
-                    rembSer.getReimbursementbyEmId(loggedInEmployee);
-                    break;
-                case "3":
 
-                    repeat = false;
-                    break;
 
+
+
+                } else {
+                    //Another prompt since the employee has either logged in or registered
+                    System.out.println("What would you like to do?");
+                    System.out.println("Press 1 to create a ticket, 2 to view your tickets, or 3 to logout");
+                    String choiceTwo = input.nextLine();
+
+                    switch (choiceTwo) {
+                        case "1":
+                            rembSer.submitReimbursment(loggedInEmployee);
+                            break;
+                        case "2":
+                            rembSer.getReimbursementbyEmId(loggedInEmployee);
+                            break;
+                        case "3":
+
+                            //repeat = false;
+                            System.exit(0);
+                            break;
+
+                    }
+                }
+
+            } else{
+                System.out.println("Please log in, something went wrong");
             }
-
         }
     }
-    }
-
 }
+

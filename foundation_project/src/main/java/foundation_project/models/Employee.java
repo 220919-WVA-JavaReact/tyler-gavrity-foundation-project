@@ -10,6 +10,15 @@ public class Employee {
 
         private String password;
 
+        private String isManager;
+
+    public Employee(int em_id, String username, String password, String isManager) {
+        this.em_id = em_id;
+        this.username = username;
+        this.password = password;
+        this.isManager = isManager;
+    }
+
     public Employee(String username, String password) {
         this.username = username;
         this.password = password;
@@ -52,18 +61,26 @@ public class Employee {
         this.password = password;
     }
 
+    public String getisManager() {
+        return isManager;
+    }
 
+    public void setisManager(String is_Manager) {
+        this.isManager = isManager;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return em_id == employee.em_id && username.equals(employee.username) && password.equals(employee.password);
+        return em_id == employee.em_id && username.equals(employee.username) && password.equals(employee.password) && isManager.equals(employee.isManager);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(em_id, username, password);
+        return Objects.hash(em_id, username, password, isManager);
     }
 }
+
+

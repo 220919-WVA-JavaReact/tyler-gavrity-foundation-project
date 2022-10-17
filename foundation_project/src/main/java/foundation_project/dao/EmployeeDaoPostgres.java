@@ -35,10 +35,11 @@ public class EmployeeDaoPostgres implements EmployeeDAO {
                 int em_id = rs.getInt("em_id");
                 String dataUser = rs.getString("em_username");
                 String dataPassword = rs.getString("em_password");
+                String dataManager = rs.getString("is_manager");
 
                 //Now that I have my fields we create a teacher object
 
-                logEm = new Employee(em_id, dataUser, dataPassword);
+                logEm = new Employee(em_id, dataUser, dataPassword, dataManager);
 
             }
         } catch (SQLException e) {
@@ -61,17 +62,21 @@ public class EmployeeDaoPostgres implements EmployeeDAO {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
             stmt.setString(2, password);
+            //stmt.setString(3, isManager);
 
-            ResultSet rs;
+            ResultSet rs = stmt.executeQuery();
+           // = stmt.executeQuery()) != null
+            if (rs.next()) {
 
-            if ((rs = stmt.executeQuery()) != null) {
                 //if you've gotten this far then that means the query went through
 
-                rs.next();
+
                 String gUsername = rs.getString("em_username");
                 String gPassword = rs.getString("em_password");
+               String gIsManager = rs.getString("is_manager");
                 int id = rs.getInt("em_id");
-                em = new Employee(id, gUsername, gPassword);
+                //em =
+                     return   new Employee(id, gUsername, gPassword, gIsManager);
             }
 
         } catch (SQLException e) {
