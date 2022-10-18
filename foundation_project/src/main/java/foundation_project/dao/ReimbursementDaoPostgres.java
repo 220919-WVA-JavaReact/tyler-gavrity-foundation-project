@@ -98,14 +98,90 @@ public class ReimbursementDaoPostgres implements ReimbursementDAO{
         }
 
 
-        return tickets;
+        return null;
     }
 
     @Override
-    public boolean updateReimbursement(Reimbursement status) {
+    public Reimbursement updateReimbursement(String status, int ticket_id) {
+        //Connection conn = ConnectionUtil.getConnection();
 
-        //This will be used by the manager to change the ticket status from pending to approved
-        return false;
+        //List<Reimbursement> tickets = new ArrayList<>();
+
+        try(Connection conn = ConnectionUtil.getConnection()){
+            //Statement stmt = conn.createStatement();
+            //What do you want the string to get?
+
+            String sql = "update reimbursement set status = ? where ticket_id = ? returning *";
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, status);
+            stmt.setInt(2, ticket_id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                int updTicketId = rs.getInt("ticket_id");
+                int updAmount = rs.getInt("amount");
+                String updDescription = rs.getString("description");
+                String updStatus = rs.getString("status");
+                int updEmId = rs.getInt("em_id");
+
+
+                Reimbursement ticket = new Reimbursement(updTicketId, updAmount, updDescription, updStatus, updEmId);
+                //System.out.println(ticket.toString());
+
+                //To add the item to the list of teachers
+                System.out.println("Ticket updated");
+                //tickets.add(ticket);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            System.out.println("Couldn't update ticket");
+        }
+        return null;
+    }
+
+    @Override
+    public List<Reimbursement> getReimbursementByPending() {
+        Connection conn = ConnectionUtil.getConnection();
+
+        List<Reimbursement> tickets = new ArrayList<>();
+
+        try{
+            //Statement stmt = conn.createStatement();
+            //What do you want the string to get?
+
+            String sql = "select * from reimbursement where status = 'pending'";
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            //stmt.setInt(1, em_id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                int viewTicketId = rs.getInt("ticket_id");
+                int viewAmount = rs.getInt("amount");
+                String viewDescription = rs.getString("description");
+                String viewStatus = rs.getString("status");
+                int viewEmId = rs.getInt("em_id");
+
+
+                Reimbursement ticket = new Reimbursement(viewTicketId, viewAmount, viewDescription, viewStatus, viewEmId);
+                System.out.println(ticket.toString());
+
+                //To add the item to the list of teachers
+
+                tickets.add(ticket);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            System.out.println("Couldn't get employee's tickets");
+        }
+
+
+        return null;
     }
 
 //    @Override

@@ -74,6 +74,10 @@ public class Reimbursement {
         this.em_id = em_id;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     @Override
     public String toString() {
 

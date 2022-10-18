@@ -60,35 +60,7 @@ public class EmployeeService {
 
     }
 
-//    public Employee looper() {
-//        //Employee loggedInEmployee = null;
-//
-//        while (repeat) {
-//
-//            if (loggedInEmployee != null) {
-//                //Another prompt since the employee has either logged in or registered
-//                System.out.println("What would you like to do?");
-//                System.out.println("Press 1 to create a ticket, 2 to view your tickets, or 3 to logout");
-//                String choiceTwo = input.nextLine();
-//
-//                switch (choiceTwo) {
-//                    case "1":
-//                        rembSer.submitReimbursment(loggedInEmployee);
-//                        break;
-//                    case "2":
-//                        rembSer.getReimbursementbyEmId(loggedInEmployee);
-//                        break;
-//                    case "3":
-//
-//                        repeat = false;
-//                        break;
-//
-//                }
-//
-//            }
-//        }
-//        return null;
-//    }
+
 }
 
 

@@ -12,7 +12,9 @@ public interface ReimbursementDAO {
     //This function will display the reimbursement
     List<Reimbursement> getReimbursementbyEmId(int em_id);
 
-    boolean updateReimbursement(Reimbursement status);
+    Reimbursement updateReimbursement(String status, int ticket_id);
+
+    List<Reimbursement> getReimbursementByPending();
 
 //    void submitReimbursement(int amount, String description, int em_id);
     //This will be used to change the status of the ticket from pending to confirmed

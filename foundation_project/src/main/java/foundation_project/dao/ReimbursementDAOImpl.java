@@ -32,9 +32,14 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
     }
 
     @Override
-    public boolean updateReimbursement(Reimbursement status) {
+    public Reimbursement updateReimbursement(String status, int ticket_id) {
         System.out.println("This will return when status changes from pending to approved");
-        return false;
+        return null;
+    }
+
+    @Override
+    public List<Reimbursement> getReimbursementByPending() {
+        return null;
     }
 
 //    @Override

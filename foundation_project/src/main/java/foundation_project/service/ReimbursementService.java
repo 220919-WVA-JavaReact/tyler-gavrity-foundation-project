@@ -6,6 +6,7 @@ import foundation_project.dao.ReimbursementDaoPostgres;
 import foundation_project.models.Employee;
 import foundation_project.models.Reimbursement;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ReimbursementService {
@@ -41,9 +42,20 @@ public class ReimbursementService {
 
 
     //Now we have to create a method that creates the reimbursment ticket
-    public void updateStatus(){
+    public void updateReimbursment(){
+        System.out.println("You would like to update a ticket");
+        System.out.println("+---------------------------------------------+");
+        System.out.println("Which ticket number would you like to update?");
+        int updNum = Integer.parseInt(input.nextLine());
+        System.out.println("What would you like to do? approve or deny");
+        String changeStat = input.nextLine();
+        check.updateReimbursement(changeStat, updNum );
         //This will be used by the manager to change the pending to approved
-        System.out.println("Has this Reimbursment ticket been approved? ");
+        //System.out.println("Has this Reimbursment ticket been approved? ");
 
+    }
+
+    public List<Reimbursement> getReimbursementByPending(){
+         return check.getReimbursementByPending();
     }
 }

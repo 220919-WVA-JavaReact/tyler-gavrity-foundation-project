@@ -62,18 +62,24 @@ public class App {
                     System.out.println("Welcome to the manager station");
                     System.out.println("+-----------------------------------+");
                     System.out.println("Please choose an option");
-                    System.out.println("1 to view pending tickets, 2 to approve or deny a ticket");
+                    System.out.println("1 to view pending tickets, 2 to approve or deny a ticket, or 3 to exit");
                     String managChoice = input.nextLine();
-
-                    switch (managChoice){
-                        case "1":
-                            System.out.println("view pending");
-                            break;
-                        case "2":
-                            System.out.println("Approve or deny");
-                            break;
+                    boolean daRepeat = true;
+                    while(daRepeat) {
+                        switch (managChoice) {
+                            case "1":
+                                //System.out.println("view pending");
+                                rembSer.getReimbursementByPending();
+                                break;
+                            case "2":
+                                //System.out.println("Approve or deny");
+                                rembSer.updateReimbursment();
+                                break;
+                            case "3":
+                                System.exit(0);
+                        }
+                        break;
                     }
-                    break;
 
 
 
