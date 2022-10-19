@@ -41,6 +41,30 @@ public class EmployeeService {
 
     }
 
+    public Employee login(String username, String password) {
+
+//        System.out.println("Please enter your username");
+//        String username = input.nextLine();
+//        System.out.println("Please enter your password");
+//        String password = input.nextLine();
+
+        Employee em = emDao.getByUsername(username);
+
+        if (em.getPassword().equals(password)) {
+            System.out.println("Sign in successful");
+            System.out.println("+------------------------+");
+            System.out.println("");
+            System.out.println("Welcome " + username);
+
+            return em;
+
+        } else {
+            System.out.println("Please try again");
+            return null;
+        }
+
+    }
+
 
     public Employee register() {
         System.out.println("Please enter your username");

@@ -59,6 +59,8 @@
                     <server>LocalTomcat</server>
                     <path>/foundationApp</path>
                     <update>true</update>
+                    <username>maven-tomcat</username>
+                    <password>revature</password>
                 </configuration>
             </plugin>
         </plugins>
