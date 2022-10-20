@@ -55,10 +55,11 @@ public class ReimbServlet extends HttpServlet {
 
         Reimbursement reimbursements = reimb.updateReimbursment(providedStatus, providedTicketId);
 
-        if(session != null) {
+        //if(session != null) {
             Employee loggedIn = (Employee) session.getAttribute("auth_employee");
             // int em_id = (Integer) credentials.get("em_id");
             if (loggedIn.getisManager().equals("manager")) {
+                if(session != null) {
                 Reimbursement reimbursement = reimb.updateReimbursment(providedStatus, providedTicketId);
                 String payload = mapper.writeValueAsString(reimbursement);
                 if (!payload.equals("null")) {
@@ -72,7 +73,10 @@ public class ReimbServlet extends HttpServlet {
                 }
 
             }
-        }
+        }else{
+                resp.getWriter().write("MANAGERS ONLY");
+                resp.setStatus(400);
+            }
     }
 
     @Override

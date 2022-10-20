@@ -75,12 +75,15 @@ public class EmployeeService {
 //        String isManager = input.nextLine();
 
         //now use the create method
-
-        Employee em = emDao.registerEmployee(username, password);
-        System.out.println("You have been registered");
-
-
-        return em;
+        Employee checkName = emDao.getByUsername(username);
+        if(checkName == null) {
+            Employee em = emDao.registerEmployee(username, password);
+            //System.out.println("You have been registered");
+            return em;
+        }else{
+            checkName = new Employee(-1);
+            return checkName;
+        }
 
     }
 
