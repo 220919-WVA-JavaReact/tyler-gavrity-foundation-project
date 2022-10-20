@@ -74,4 +74,35 @@ public class ReimbServlet extends HttpServlet {
             }
         }
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HashMap<String, Object> credentials = mapper.readValue(req.getInputStream(), HashMap.class);
+        HttpSession session = req.getSession(false);
+
+        int providedAmount = (Integer) credentials.get("amount");
+        String providedDescription = (String) credentials.get("description");
+
+
+       // Reimbursement reimbursements = reimb.submitReimbursment(providedAmount, providedDescription, loggedIn.getEm_id());
+
+        if(session != null) {
+            Employee loggedIn = (Employee) session.getAttribute("auth_employee");
+            // int em_id = (Integer) credentials.get("em_id");
+            if (loggedIn.getisManager().equals("employee")) {
+                Reimbursement reimbursement = reimb.submitReimbursment(providedAmount, providedDescription, loggedIn.getEm_id());
+                String payload = mapper.writeValueAsString(reimbursement);
+                if (!payload.equals("null")) {
+                    resp.setStatus(200);
+                    resp.setContentType("application/json");
+                    resp.getWriter().write("Ticket Created");
+                    resp.getWriter().write(mapper.writeValueAsString(reimbursement));
+                } else {
+                    resp.getWriter().write("Error");
+                    resp.setStatus(400);
+                }
+
+            }
+        }
+    }
 }

@@ -15,20 +15,20 @@ public class ReimbursementService {
 
     ReimbursementDAO check = new ReimbursementDaoPostgres();
 
-    public void submitReimbursment(Employee loggedIn){
+    public Reimbursement submitReimbursment(int amount,String description, int em_id){
 
-        System.out.println("Please enter your amount for reimbursement");
-        int amount = Integer.parseInt(input.nextLine());
-
-        System.out.println("Please enter the description of the reimbursement");
-        String description = input.nextLine();
+//        System.out.println("Please enter your amount for reimbursement");
+//        int amount = Integer.parseInt(input.nextLine());
+//
+//        System.out.println("Please enter the description of the reimbursement");
+//        String description = input.nextLine();
 
 //        System.out.println("Please enter your employee ID");
 //        int em_id = Integer.parseInt(input.nextLine());
 
 
         //This method makes sure that the info gets sent to the database
-        check.submitReimbursement(amount, description, loggedIn.getEm_id());
+       return  check.submitReimbursement(amount, description, em_id);
     }
 
     public List<Reimbursement> getReimbursementbyEmId(int em_id){

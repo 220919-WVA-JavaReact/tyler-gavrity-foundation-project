@@ -32,25 +32,27 @@ public class ReimbursementDaoPostgres implements ReimbursementDAO{
             if ((rs = stmt.executeQuery()) != null ){
                 //if the statement is not null aka the query went through
 
-                rs.next();
+                while(rs.next()) {
 
-                int receivedTicket_id = rs.getInt("ticket_id");
-                int receivedAmount = rs.getInt("amount");
-                String receivedDescription = rs.getString("description");
-//                String receivedStatus = rs.getString("status");
-                int receivedEmId = rs.getInt("em_id");
+                    int receivedTicket_id = rs.getInt("ticket_id");
+                    int receivedAmount = rs.getInt("amount");
+                    String receivedDescription = rs.getString("description");
+                    String receivedStatus = rs.getString("status");
+                    int receivedEmId = rs.getInt("em_id");
 
-                System.out.println("Your ticket has been submitted");
+                    System.out.println("Your ticket has been submitted");
 
-                //call the new object??
-                //ticket = new Reimbursement(receivedTicket_id,receivedAmount, receivedDescription, receivedStatus, receivedEmId);
+                    //call the new object??
+                    ticket = new Reimbursement(receivedTicket_id, receivedAmount, receivedDescription, receivedStatus, receivedEmId);
+
+                }
             }
         } catch (SQLException e){
             e.printStackTrace();
             System.out.println("Couldn't create ticket");
         }
 
-        return null;
+        return ticket;
     }
 
     @Override
