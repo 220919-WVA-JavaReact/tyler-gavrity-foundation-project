@@ -50,6 +50,7 @@ public class ReimbursementService {
 //        int updNum = Integer.parseInt(input.nextLine());
 //        System.out.println("What would you like to do? approve or deny");
 //        String changeStat = input.nextLine();
+
         return check.updateReimbursement(status, ticket_id);
         //This will be used by the manager to change the pending to approved
         //System.out.println("Has this Reimbursment ticket been approved? ");
@@ -59,5 +60,9 @@ public class ReimbursementService {
     public List<Reimbursement> getReimbursementByPending(){
 
         return check.getReimbursementByPending();
+    }
+
+    public Reimbursement getReimbursementById(int ticket_id){
+        return check.getReimbursementById(ticket_id);
     }
 }

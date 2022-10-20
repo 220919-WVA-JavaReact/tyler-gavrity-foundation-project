@@ -42,6 +42,11 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
         return null;
     }
 
+    @Override
+    public Reimbursement getReimbursementById(int ticket_id) {
+        return null;
+    }
+
 //    @Override
 //    public void submitReimbursement(int amount, String description, int em_id) {
 //        return null;

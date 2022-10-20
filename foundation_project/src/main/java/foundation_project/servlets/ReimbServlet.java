@@ -52,31 +52,36 @@ public class ReimbServlet extends HttpServlet {
 
         String providedStatus = (String) credentials.get("status");
         int providedTicketId = (Integer) credentials.get("ticket_id");
+        Reimbursement checkerReim = reimb.getReimbursementById(providedTicketId);
 
-        Reimbursement reimbursements = reimb.updateReimbursment(providedStatus, providedTicketId);
 
-        //if(session != null) {
+        if(checkerReim.getStatus().equals("pending")) {
+            Reimbursement reimbursements = reimb.updateReimbursment(providedStatus, providedTicketId);
             Employee loggedIn = (Employee) session.getAttribute("auth_employee");
             // int em_id = (Integer) credentials.get("em_id");
             if (loggedIn.getisManager().equals("manager")) {
-                if(session != null) {
-                Reimbursement reimbursement = reimb.updateReimbursment(providedStatus, providedTicketId);
-                String payload = mapper.writeValueAsString(reimbursement);
-                if (!payload.equals("null")) {
-                    resp.setStatus(200);
-                    resp.setContentType("application/json");
-                    resp.getWriter().write("You updated the ticket");
-                    resp.getWriter().write(mapper.writeValueAsString(reimbursements));
-                } else {
-                    resp.getWriter().write("Error");
-                    resp.setStatus(400);
-                }
+                if (session != null) {
+                    Reimbursement reimbursement = reimb.updateReimbursment(providedStatus, providedTicketId);
+                    String payload = mapper.writeValueAsString(reimbursement);
+                    if (!payload.equals("null")) {
+                        resp.setStatus(200);
+                        resp.setContentType("application/json");
+                        resp.getWriter().write("You updated the ticket");
+                        resp.getWriter().write(mapper.writeValueAsString(reimbursements));
+                    } else {
+                        resp.getWriter().write("Error");
+                        resp.setStatus(400);
+                    }
 
-            }
-        }else{
+                }
+            } else {
                 resp.getWriter().write("MANAGERS ONLY");
                 resp.setStatus(400);
             }
+        }else{
+            resp.setStatus(400);
+            resp.getWriter().write("This ticket has already been changed");
+        }
     }
 
     @Override

@@ -189,8 +189,53 @@ public class ReimbursementDaoPostgres implements ReimbursementDAO{
         return tickets;
     }
 
+    @Override
+    public Reimbursement getReimbursementById(int ticket_id) {
+        Reimbursement checkTicket = new Reimbursement();
+
+
+        try(Connection conn = ConnectionUtil.getConnection()) {
+            //Statement stmt = conn.createStatement();
+            //What do you want the string to get?
+
+            String sql = "select * from reimbursement where ticket_id = ?";
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1, ticket_id);
+
+            ResultSet rs; //= stmt.executeQuery();
+            if ((rs = stmt.executeQuery()) != null) {
+                    rs.next();
+                    int viewTicketId = rs.getInt("ticket_id");
+                    int viewAmount = rs.getInt("amount");
+                    String viewDescription = rs.getString("description");
+                    String viewStatus = rs.getString("status");
+                    int viewEmId = rs.getInt("em_id");
+
+
+                    Reimbursement ticket = new Reimbursement(viewTicketId, viewAmount, viewDescription, viewStatus, viewEmId);
+                    //System.out.println(ticket.toString());
+
+                    //To add the item to the list of teachers
+
+                    //tickets.add(ticket);
+
+                    return ticket;
+                }
+
+        }catch(SQLException e){
+                e.printStackTrace();
+                System.out.println("Couldn't get employee's tickets");
+            }
+        return checkTicket;
+    }
+
 //    @Override
 //    public void submitReimbursement(int amount, String description, int em_id) {
 //
 //    }
+
+
+
 }

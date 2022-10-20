@@ -16,6 +16,8 @@ public interface ReimbursementDAO {
 
     List<Reimbursement> getReimbursementByPending();
 
+    Reimbursement getReimbursementById(int ticket_id);
+
 //    void submitReimbursement(int amount, String description, int em_id);
     //This will be used to change the status of the ticket from pending to confirmed
 }
