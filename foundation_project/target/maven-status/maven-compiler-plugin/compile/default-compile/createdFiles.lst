@@ -11,6 +11,7 @@ foundation_project\dao\ReimbursementDaoPostgres.class
 org\example\Main.class
 foundation_project\dao\ReimbursementDAOImpl.class
 foundation_project\servlets\SanityServlet.class
+foundation_project\servlets\PendingServlet.class
 foundation_project\models\Reimbursement.class
 foundation_project\dao\EmployeeDAOImpl.class
 foundation_project\service\EmployeeService.class

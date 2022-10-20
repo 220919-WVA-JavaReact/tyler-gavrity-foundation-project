@@ -151,11 +151,9 @@ public class ReimbursementDaoPostgres implements ReimbursementDAO{
 
     @Override
     public List<Reimbursement> getReimbursementByPending() {
-        Connection conn = ConnectionUtil.getConnection();
-
         List<Reimbursement> tickets = new ArrayList<>();
 
-        try{
+        try(Connection conn = ConnectionUtil.getConnection()){
             //Statement stmt = conn.createStatement();
             //What do you want the string to get?
 
@@ -188,7 +186,7 @@ public class ReimbursementDaoPostgres implements ReimbursementDAO{
         }
 
 
-        return null;
+        return tickets;
     }
 
 //    @Override

@@ -58,6 +58,17 @@
         <url-pattern>/reimb</url-pattern>
     </servlet-mapping>
 
+<!--    Pending servlet-->
+
+    <servlet>
+        <servlet-name>PendingServlet</servlet-name>
+        <servlet-class>foundation_project.servlets.PendingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PendingServlet</servlet-name>
+        <url-pattern>/pending</url-pattern>
+    </servlet-mapping>
+
 
 
 <!--    Register servlet-->

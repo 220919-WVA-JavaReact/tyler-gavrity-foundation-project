@@ -84,25 +84,28 @@ public class ReimbServlet extends HttpServlet {
         String providedDescription = (String) credentials.get("description");
 
 
-       // Reimbursement reimbursements = reimb.submitReimbursment(providedAmount, providedDescription, loggedIn.getEm_id());
+        // Reimbursement reimbursements = reimb.submitReimbursment(providedAmount, providedDescription, loggedIn.getEm_id());
+        if(!providedDescription.equals("")){
+            if(providedAmount >= 1) {
+                if (session != null) {
+                    Employee loggedIn = (Employee) session.getAttribute("auth_employee");
+                    // int em_id = (Integer) credentials.get("em_id");
+                    if (loggedIn.getisManager().equals("employee")) {
+                        Reimbursement reimbursement = reimb.submitReimbursment(providedAmount, providedDescription, loggedIn.getEm_id());
+                        String payload = mapper.writeValueAsString(reimbursement);
+                        if (!payload.equals("null")) {
+                            resp.setStatus(200);
+                            resp.setContentType("application/json");
+                            resp.getWriter().write("Ticket Created");
+                            resp.getWriter().write(mapper.writeValueAsString(reimbursement));
+                        } else {
+                            resp.getWriter().write("Error");
+                            resp.setStatus(400);
+                        }
 
-        if(session != null) {
-            Employee loggedIn = (Employee) session.getAttribute("auth_employee");
-            // int em_id = (Integer) credentials.get("em_id");
-            if (loggedIn.getisManager().equals("employee")) {
-                Reimbursement reimbursement = reimb.submitReimbursment(providedAmount, providedDescription, loggedIn.getEm_id());
-                String payload = mapper.writeValueAsString(reimbursement);
-                if (!payload.equals("null")) {
-                    resp.setStatus(200);
-                    resp.setContentType("application/json");
-                    resp.getWriter().write("Ticket Created");
-                    resp.getWriter().write(mapper.writeValueAsString(reimbursement));
-                } else {
-                    resp.getWriter().write("Error");
-                    resp.setStatus(400);
+                    }
                 }
-
-            }
-        }
+            }else{resp.setStatus(400);}
+    }else{resp.setStatus(400);}
     }
 }
