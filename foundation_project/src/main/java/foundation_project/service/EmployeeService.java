@@ -66,17 +66,17 @@ public class EmployeeService {
     }
 
 
-    public Employee register() {
-        System.out.println("Please enter your username");
-        String user = input.nextLine();
-        System.out.println("Please enter your password");
-        String password = input.nextLine();
+    public Employee register(String username, String password) {
+//        System.out.println("Please enter your username");
+//        String user = input.nextLine();
+//        System.out.println("Please enter your password");
+//        String password = input.nextLine();
 //        System.out.println("Are you an employee or manager?");
 //        String isManager = input.nextLine();
 
         //now use the create method
 
-        Employee em = emDao.registerEmployee(user, password);
+        Employee em = emDao.registerEmployee(username, password);
         System.out.println("You have been registered");
 
 

@@ -2,6 +2,8 @@ foundation_project\service\ReimbursementService.class
 foundation_project\util\TestConnection.class
 foundation_project\servlets\AuthServlet.class
 foundation_project\dao\ReimbursementDAO.class
+foundation_project\servlets\ReimbServlet.class
+foundation_project\servlets\RegServlet.class
 foundation_project\dao\EmployeeDAO.class
 foundation_project\App.class
 foundation_project\dao\EmployeeDaoPostgres.class

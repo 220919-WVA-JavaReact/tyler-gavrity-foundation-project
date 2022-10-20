@@ -61,11 +61,11 @@ public class ReimbursementDaoPostgres implements ReimbursementDAO{
     @Override
     public List<Reimbursement> getReimbursementbyEmId(int em_id) {
 
-        Connection conn = ConnectionUtil.getConnection();
+        //Connection conn = ConnectionUtil.getConnection();
 
         List<Reimbursement> tickets = new ArrayList<>();
 
-        try{
+        try(Connection conn = ConnectionUtil.getConnection()){
             //Statement stmt = conn.createStatement();
             //What do you want the string to get?
 
@@ -75,39 +75,42 @@ public class ReimbursementDaoPostgres implements ReimbursementDAO{
 
             stmt.setInt(1, em_id);
 
-            ResultSet rs = stmt.executeQuery();
+            ResultSet rs;
+            if((rs = stmt.executeQuery()) != null) {
+                while (rs.next()) {
+                    int ticketId = rs.getInt("ticket_id");
+                    int amount = rs.getInt("amount");
+                    String description = rs.getString("description");
+                    String status = rs.getString("status");
+                    int emId = rs.getInt("em_id");
 
-            while(rs.next()) {
-                int ticketId = rs.getInt("ticket_id");
-                int amount = rs.getInt("amount");
-                String description = rs.getString("description");
-                String status = rs.getString("status");
-                int emId = rs.getInt("em_id");
 
+                    Reimbursement ticket = new Reimbursement(ticketId, amount, description, status, emId);
+                    System.out.println(ticket.toString());
 
-                Reimbursement ticket = new Reimbursement(ticketId, amount, description, status, emId);
-                System.out.println(ticket.toString());
+                    //To add the item to the list of teachers
 
-                //To add the item to the list of teachers
-
-                tickets.add(ticket);
+                    tickets.add(ticket);
+                }
             }
         } catch (SQLException e){
             e.printStackTrace();
             System.out.println("Couldn't get employee's tickets");
+            return null;
         }
 
 
-        return null;
+        return tickets;
     }
 
     @Override
     public Reimbursement updateReimbursement(String status, int ticket_id) {
         //Connection conn = ConnectionUtil.getConnection();
 
-        //List<Reimbursement> tickets = new ArrayList<>();
+        List<Reimbursement> tickets = new ArrayList<>();
 
-        try(Connection conn = ConnectionUtil.getConnection()){
+        Reimbursement ticket = null;
+        try (Connection conn = ConnectionUtil.getConnection()) {
             //Statement stmt = conn.createStatement();
             //What do you want the string to get?
 
@@ -118,28 +121,30 @@ public class ReimbursementDaoPostgres implements ReimbursementDAO{
             stmt.setString(1, status);
             stmt.setInt(2, ticket_id);
 
-            ResultSet rs = stmt.executeQuery();
+            ResultSet rs;
+            if ((rs = stmt.executeQuery()) != null) {
+                while (rs.next()) {
+                    int updTicketId = rs.getInt("ticket_id");
+                    int updAmount = rs.getInt("amount");
+                    String updDescription = rs.getString("description");
+                    String updStatus = rs.getString("status");
+                    int updEmId = rs.getInt("em_id");
 
-            while(rs.next()) {
-                int updTicketId = rs.getInt("ticket_id");
-                int updAmount = rs.getInt("amount");
-                String updDescription = rs.getString("description");
-                String updStatus = rs.getString("status");
-                int updEmId = rs.getInt("em_id");
 
+                    ticket = new Reimbursement(updTicketId, updAmount, updDescription, updStatus, updEmId);
+                    //System.out.println(ticket.toString());
 
-                Reimbursement ticket = new Reimbursement(updTicketId, updAmount, updDescription, updStatus, updEmId);
-                //System.out.println(ticket.toString());
-
-                //To add the item to the list of teachers
-                System.out.println("Ticket updated");
-                //tickets.add(ticket);
+                    //To add the item to the list of teachers
+                    System.out.println("Ticket updated");
+                    tickets.add(ticket);
+                    //return ticket;
+                }
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Couldn't update ticket");
         }
-        return null;
+        return ticket;
     }
 
     @Override

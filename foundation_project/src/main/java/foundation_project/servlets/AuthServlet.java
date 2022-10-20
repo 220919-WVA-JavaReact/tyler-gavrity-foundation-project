@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -30,9 +31,13 @@ public class AuthServlet extends HttpServlet {
             resp.setStatus(200);
             resp.setContentType("application/json");
             resp.getWriter().write(mapper.writeValueAsString(employee));
+            HttpSession session = req.getSession();
+            session.setAttribute("auth_employee", employee);
         }else {
             resp.setStatus(404);
             resp.getWriter().write("Invalid credentials");
         }
     }
+
+
 }

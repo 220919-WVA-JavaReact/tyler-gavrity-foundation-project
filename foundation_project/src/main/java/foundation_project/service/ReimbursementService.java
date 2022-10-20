@@ -31,25 +31,26 @@ public class ReimbursementService {
         check.submitReimbursement(amount, description, loggedIn.getEm_id());
     }
 
-    public void getReimbursementbyEmId(Employee loggedIn){
+    public List<Reimbursement> getReimbursementbyEmId(int em_id){
 //        System.out.println("Please enter your Employee Id");
 //        int em_id = input.nextInt();
 
-
-        check.getReimbursementbyEmId(loggedIn.getEm_id());
+        //List<Reimbursement> theList = check.getReimbursementbyEmId(em_id);
+        return check.getReimbursementbyEmId(em_id);
+        //return theList;
     }
 
 
 
     //Now we have to create a method that creates the reimbursment ticket
-    public void updateReimbursment(){
-        System.out.println("You would like to update a ticket");
-        System.out.println("+---------------------------------------------+");
-        System.out.println("Which ticket number would you like to update?");
-        int updNum = Integer.parseInt(input.nextLine());
-        System.out.println("What would you like to do? approve or deny");
-        String changeStat = input.nextLine();
-        check.updateReimbursement(changeStat, updNum );
+    public Reimbursement updateReimbursment(String status, int ticket_id){
+//        System.out.println("You would like to update a ticket");
+//        System.out.println("+---------------------------------------------+");
+//        System.out.println("Which ticket number would you like to update?");
+//        int updNum = Integer.parseInt(input.nextLine());
+//        System.out.println("What would you like to do? approve or deny");
+//        String changeStat = input.nextLine();
+        return check.updateReimbursement(status, ticket_id);
         //This will be used by the manager to change the pending to approved
         //System.out.println("Has this Reimbursment ticket been approved? ");
 

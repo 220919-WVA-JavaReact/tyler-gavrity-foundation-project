@@ -32,7 +32,7 @@ public class App {
             case "1":
 
                 System.out.println("Login");
-                loggedInEmployee = emSer.login();
+                //loggedInEmployee = emSer.login();
                 //emSer.looper();
                 break;
 
@@ -40,7 +40,7 @@ public class App {
             case "2":
 
                 System.out.println("Register");
-                loggedInEmployee = emSer.register();
+                //loggedInEmployee = emSer.register();
                 //emSer.looper();
                 break;
 
@@ -69,11 +69,11 @@ public class App {
                         switch (managChoice) {
                             case "1":
                                 //System.out.println("view pending");
-                                rembSer.getReimbursementByPending();
+                                //rembSer.getReimbursementByPending();
                                 break;
                             case "2":
                                 //System.out.println("Approve or deny");
-                                rembSer.updateReimbursment();
+                                //rembSer.updateReimbursment();
                                 break;
                             case "3":
                                 System.exit(0);
@@ -92,10 +92,10 @@ public class App {
 
                     switch (choiceTwo) {
                         case "1":
-                            rembSer.submitReimbursment(loggedInEmployee);
+                            //rembSer.submitReimbursment(loggedInEmployee);
                             break;
                         case "2":
-                            rembSer.getReimbursementbyEmId(loggedInEmployee);
+                           // rembSer.getReimbursementbyEmId(loggedInEmployee);
                             break;
                         case "3":
 
