@@ -76,13 +76,13 @@ public class EmployeeService {
 
         //now use the create method
         Employee checkName = emDao.getByUsername(username);
-        if(checkName == null) {
+        if(checkName != null) {
             Employee em = emDao.registerEmployee(username, password);
             //System.out.println("You have been registered");
             return em;
         }else{
-            checkName = new Employee(-1);
-            return checkName;
+            //checkName = new Employee(-1);
+            return null;
         }
 
     }

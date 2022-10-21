@@ -29,21 +29,22 @@ public class EmployeeDaoPostgres implements EmployeeDAO {
                 //if the result set is not blank then we found our value
 
                 //Move the cursor forward
-                rs.next();
+                if(rs.next()) {
 
-                //Now we can pull the information out and store it in the teacher object
-                int em_id = rs.getInt("em_id");
-                String dataUser = rs.getString("em_username");
-                String dataPassword = rs.getString("em_password");
-                String dataManager = rs.getString("is_manager");
+                    //Now we can pull the information out and store it in the teacher object
+                    int em_id = rs.getInt("em_id");
+                    String dataUser = rs.getString("em_username");
+                    String dataPassword = rs.getString("em_password");
+                    String dataManager = rs.getString("is_manager");
 
-                //Now that I have my fields we create a teacher object
+                    //Now that I have my fields we create a teacher object
 
-                logEm = new Employee(em_id, dataUser, dataPassword, dataManager);
-
+                    logEm = new Employee(em_id, dataUser, dataPassword, dataManager);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
 
         return logEm;

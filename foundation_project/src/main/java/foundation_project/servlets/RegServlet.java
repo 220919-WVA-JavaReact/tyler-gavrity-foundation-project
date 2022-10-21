@@ -27,18 +27,18 @@ public class RegServlet extends HttpServlet {
 
         Employee employee = es.register(providedUsername, providedPassword);
 
-        if (employee.getEm_id() != -1) {
-            if (employee != null) {
+      //  if (employee.getEm_id() > 0) {
+            if (employee.getUsername() != null) {
                 //I need to get the employee to throw the else statement if that username is already in use
                 //.getPassword().equals(providedPassword)
                 resp.setStatus(200);
                 resp.setContentType("application/json");
                 resp.getWriter().write("Employee created");
                 resp.getWriter().write(mapper.writeValueAsString(employee));
-            } else {
-                resp.setStatus(404);
-                resp.getWriter().write("Couldn't register user");
-            }
+//            } else {
+//                resp.setStatus(404);
+//                resp.getWriter().write("Couldn't register user");
+            //}
 
         }else{
             resp.setStatus(404);
